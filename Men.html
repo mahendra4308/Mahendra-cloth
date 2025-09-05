@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Men Collection - Mahendra Cloth House</title>
+ <!-- index वाली ही CSS use कर सकते हो -->
+  <style>
+  
+  
+  *{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f4f6f9;color:#333;line-height:1.7}
+
+/* Header */
+header{background:#222;padding:12px 20px}
+.header-container{display:flex;align-items:center;gap:15px}
+.header-container img{height:60px;border-radius:10px}
+.header-container h1{color:white;font-size:22px}
+
+/* Nav */
+nav{background:#0d3970fe;box-shadow:0 2px 6px rgba(0,0,0,0.2);position:sticky;top:5px;z-index:50}
+nav ul{list-style:none;display:flex;justify-content:space-between;align-items:center}
+nav ul li{flex:1;text-align:center;padding:10px;color:white;font-weight:600;cursor:pointer;transition:0.3s;white-space:nowrap;min-width:50px;height:42px;line-height:30px;box-shadow:0 0 5px white}
+nav ul li:hover{background:#2dbaabfe;color:yellow}
+nav ul li ul{display:none;position:absolute;background:#0d3970fe;margin-top:10px;min-width:120px;box-shadow:0 0 5px black;text-align:center}
+nav ul li ul li{padding:10px;color:white;font-size:16px}
+nav ul li:hover>ul{display:block}
+nav ul li a{text-decoration:none;color:white;display:block;width:100%}
+nav ul li a:hover{color:yellow}
+.no2,.no3{width:100%;height:5px;background-color:white;box-shadow:inset 0 0 2px black;position:sticky;z-index:200}
+.no2{top:0}
+.no3{
+  top:47px;z-index:300
+  
+}
+
+
+  .all-img {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 7px;
+  padding: 10px;
+  background-color: #e3ebe4ec;
+}
+
+/* Individual gallery item container */
+.img1 {
+  background-color: white;
+  border-radius: 5px;
+  width: 100%;
+  border: 2px solid white;
+  height: 380px; /* Changed from fixed height */
+  position: relative;
+  overflow: hidden;
+  display: flex; /* Use flexbox for vertical alignment */
+  flex-direction: column;
+}
+
+/* Image inside the container */
+.img1 img {
+  width: 100%;
+  height: 380px; /* Maintains a consistent image height */
+  object-fit: cover; /* Ensures the image covers the area */
+  display: block; /* Removes extra space below the image */
+}
+
+/* Product Name */
+.product-name {
+  width: 100%;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  color: black;
+  background-color: lightyellow;
+  
+  padding: 10px 5px;
+  border-radius: 5px;
+  box-sizing: border-box; /* Includes padding in the element's total width and height */
+}
+
+/* Buy Now button */
+.buy-now {
+  background-color: #375840fe;
+  border-bottom: 3px solid #81f4e8fe;
+  color: white;
+  font-weight: bold;
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  margin-top: auto; /* This pushes the button to the bottom */
+  box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+}
+
+.buy-now:hover {
+  background: darkred;
+}
+
+/* Favourite button */
+.fav-btn {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  background: rgba(255, 255, 255, 0.8);
+  color: black;
+  font-size: 22px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: 0.3s;
+  border: 1px solid gray;
+}
+
+.fav-btn.active {
+  background: red;
+  color: white;
+}
+.men{
+  background-color: #b8b874ec;
+  color: black;
+}
+
+h5{
+  text-align: center;
+  color: gray;
+  padding: 20px;
+}
+
+</style>
+</head>
+<body>
+  
+  
+  <header>
+  <div class="header-container">
+    <img src="logo.png" alt="Logo">
+    <h1>Mahendra Cloth House</h1>
+  </div>
+</header>
+
+<div class="no2"></div>
+<nav>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li>My Order</li>
+    <li>Category ⬇
+      <ul>
+        <li class="men">Man</li>
+        <li>Women</li>
+        <li>Kids</li>
+        
+      </ul>
+    </li>
+    <li><a href="Favourite.html">Favourites</a></li>
+  </ul>
+</nav>
+<div class="no3"></div>
+
+  <h2 style="text-align:center; padding:10px; background:#0d3970fe; color:white; margin-top:10px;">Men Collection</h2>
+  <div class="all-img" id="galleryContainer"></div>
+  <h5>No More</h5>
+
+
+    
+    
+    
+    
+    
+    
+    
+  <script>
+  const products = JSON.parse(localStorage.getItem("products")) || [];
+  const galleryContainer = document.getElementById("galleryContainer");
+
+  products.filter(p => p.category === "men").forEach(product => {
+    const imgDiv = document.createElement("div");
+    imgDiv.className = "img1";
+
+    imgDiv.innerHTML = `
+      <div class="fav-btn">♡</div>
+      <img src="${product.imgSrc}" alt="${product.productName}">
+      <div class="product-name">${product.productName}</div>
+      <div class="buy-now">Buy Now</div>
+    `;
+
+    // Add to gallery
+    galleryContainer.appendChild(imgDiv);
+
+    // FAVOURITE button click handle
+    const favBtn = imgDiv.querySelector(".fav-btn");
+
+    // पहले से favourite है तो ♥ दिखाओ
+    let favourites = JSON.parse(localStorage.getItem("favourites")) || [];
+    if (favourites.find(f => f.productName === product.productName)) {
+      favBtn.classList.add("active");
+      favBtn.textContent = "♥";
+    }
+
+    favBtn.addEventListener("click", () => {
+      let favourites = JSON.parse(localStorage.getItem("favourites")) || [];
+
+      if (favourites.find(f => f.productName === product.productName)) {
+        // अगर already favourite है तो remove करो
+        favourites = favourites.filter(f => f.productName !== product.productName);
+        favBtn.classList.remove("active");
+        favBtn.textContent = "♡";
+      } else {
+        // नया favourite add करो
+        favourites.push(product);
+        favBtn.classList.add("active");
+        favBtn.textContent = "♥";
+      }
+
+      localStorage.setItem("favourites", JSON.stringify(favourites));
+    });
+  });
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>
